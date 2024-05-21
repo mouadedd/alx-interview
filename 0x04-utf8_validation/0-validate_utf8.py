@@ -1,15 +1,17 @@
 #!/usr/bin/python3
 """utf-8 validation"""
-# 0-127
-# 192 -223
-# 224-239
-# 240 -247
+"""
+0-127
+ 192 -223
+ 224-239
+ 240 -247
+"""
 
 
 def validUTF8(data):
     index = 0
     while index < len(data):
-        # Check if the current byte is within the valid ranges
+        " Check if the current byte is within the valid ranges"
         if data[index] < 128:  # 1-byte sequence
             index += 1
         elif 192 <= data[index] <= 223:  # 2-byte sequence
