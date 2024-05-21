@@ -20,14 +20,16 @@ def validUTF8(data):
             else:
                 return False
         elif 224 <= data[index] <= 239:  # 3-byte sequence
-            if index + 2 < len(data) and \
-            all(128 <= byte <= 191 for byte in data[index + 1:index + 3]):
+            if index + 2 < len(data) \
+                    and all(128 <= byte <= 191
+                            for byte in data[index + 1:index + 3]):
                 index += 3
             else:
                 return False
         elif 240 <= data[index] <= 247:  # 4-byte sequence
-            if index + 3 < len(data) and \
-            all(128 <= byte <= 191 for byte in data[index + 1:index + 4]):
+            if index + 3 < len(data) \
+                    and all(128 <= byte <= 191
+                            for byte in data[index + 1:index + 4]):
                 index += 4
             else:
                 return False
