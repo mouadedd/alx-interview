@@ -5,27 +5,30 @@
 # 224-239
 # 240 -247
 
+
 def validUTF8(data):
     index = 0
-    result = True
-    for i in data:
-        if i > 247:
-            result = False
-            break
-        if 0 <= data[0] <= 127:
-            for i in data:
-                if i > 127:
-                    result = False
-        if 192 <= data[0] <= 223:
-            for i in data:
-                if 192 <= i <= 223 :
-                    result = False
-        if 224 <= data[0] <= 239:
-            for i in data:
-                if 224 <= i <= 239 :
-                    result = False
-        if 240 <= data[0] <= 247:
-            for i in data:
-                if 240 <= i <= 247 :
-                    result = False
-    return result
+    while index < len(data):
+        # Check if the current byte is within the valid ranges
+        if data[index] < 128:  # 1-byte sequence
+            index += 1
+        elif 192 <= data[index] <= 223:  # 2-byte sequence
+            if index + 1 < len(data) and 128 <= data[index + 1] <= 191:
+                index += 2
+            else:
+                return False
+        elif 224 <= data[index] <= 239:  # 3-byte sequence
+            if index + 2 < len(data) and \
+            all(128 <= byte <= 191 for byte in data[index + 1:index + 3]):
+                index += 3
+            else:
+                return False
+        elif 240 <= data[index] <= 247:  # 4-byte sequence
+            if index + 3 < len(data) and \
+            all(128 <= byte <= 191 for byte in data[index + 1:index + 4]):
+                index += 4
+            else:
+                return False
+        else:
+            return False  # Invalid leading byte
+    return True
