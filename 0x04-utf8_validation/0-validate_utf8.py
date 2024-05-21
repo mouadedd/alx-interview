@@ -9,27 +9,29 @@
 
 
 def validUTF8(data):
+    def check_sequence(index, num_bytes):
+        for i in range(1, num_bytes):
+            if index + i >= len(data) or not (128 <= data[index + i] <= 191):
+                return False
+        return True
+
     index = 0
     while index < len(data):
-        " Check if the current byte is within the valid ranges"
-        if data[index] < 128:  # 1-byte sequence
+        byte = data[index]
+        if byte < 128:  # 1-byte sequence
             index += 1
-        elif 192 <= data[index] <= 223:  # 2-byte sequence
-            if index + 1 < len(data) and 128 <= data[index + 1] <= 191:
+        elif 192 <= byte <= 223:  # 2-byte sequence
+            if check_sequence(index, 2):
                 index += 2
             else:
                 return False
-        elif 224 <= data[index] <= 239:  # 3-byte sequence
-            if index + 2 < len(data) \
-                    and all(128 <= byte <= 191
-                            for byte in data[index + 1:index + 3]):
+        elif 224 <= byte <= 239:  # 3-byte sequence
+            if check_sequence(index, 3):
                 index += 3
             else:
                 return False
-        elif 240 <= data[index] <= 247:  # 4-byte sequence
-            if index + 3 < len(data) \
-                    and all(128 <= byte <= 191
-                            for byte in data[index + 1:index + 4]):
+        elif 240 <= byte <= 247:  # 4-byte sequence
+            if check_sequence(index, 4):
                 index += 4
             else:
                 return False
