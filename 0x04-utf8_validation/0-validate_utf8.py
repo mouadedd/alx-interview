@@ -14,17 +14,17 @@ def validUTF8(data):
 
     for i in data:
         if index == 0:
-            if i >> 7 == 0b1:
-                return False
-            elif i >> 5 == 0b110 or i >> 5 == 0b1110:
+            if i >> 5 == 0b110 or i >> 5 == 0b1110:
                 index = 1
             elif i >> 4 == 0b1110:
                 index = 2
             elif i >> 3 == 0b11110:
                 index = 3
+            elif i >> 7 == 0b1:
+                return False
 
         else:
-            if i >> 6 != 0b10:
+            if i >> 6 != 0b10:  # using the"==" invalide check 8
                 return False
             index -= 1
 
