@@ -11,7 +11,7 @@
 def validUTF8(data):
     def check_sequence(index, num_bytes):
         for i in range(1, num_bytes):
-            if index + i >= len(data) or not (128 <= data[index + i] < 192):
+            if index + i >= len(data) or not (128 <= data[index + i] < 191):
                 return False
             return True
 
