@@ -51,6 +51,6 @@ if __name__ == '__main__':
 
     for key, value in enumerate(possibilities):
         if key == len(possibilities) - 1:
-            print(value, end='')
+            print(value, end='\n')
         else:
             print(value)
