@@ -3,12 +3,6 @@
 import sys
 
 
-def print_usage():
-    '''show usage or exit'''
-    print("Usage: nqueens N")
-    sys.exit(1)
-
-
 def is_safe(row, col, cords):
     '''make sure cordinations are safe'''
     for cord in cords:
@@ -34,7 +28,8 @@ def find_solutions(n, row, col, cords, possibilities):
 
 if __name__ == '__main__':
     if len(sys.argv) != 2:
-        print_usage()
+        print("Usage: nqueens N")
+        sys.exit(1)
 
     try:
         n = int(sys.argv[1])
