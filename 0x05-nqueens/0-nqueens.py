@@ -1,12 +1,12 @@
 #!/usr/bin/python3
 """ 0. N queens """
-from sys import argv, exit
+import sys
 
 
 def print_usage():
     '''show usage or exit'''
     print("Usage: nqueens N")
-    exit(1)
+    sys.exit(1)
 
 
 def is_safe(row, col, cords):
@@ -33,18 +33,18 @@ def find_solutions(n, row, col, cords, possibilities):
 
 
 if __name__ == '__main__':
-    if len(argv) != 2:
+    if len(sys.argv) != 2:
         print_usage()
 
     try:
-        n = int(argv[1])
+        n = int(sys.argv[1])
     except ValueError:
         print('N must be a number')
-        exit(1)
+        sys.exit(1)
 
     if n < 4:
         print('N must be at least 4')
-        exit(1)
+        sys.exit(1)
 
     possibilities = []
     find_solutions(n, 0, 0, [], possibilities)
