@@ -7,8 +7,8 @@ def is_safe(row, col, cords):
     '''make sure cordinations are safe'''
     for cord in cords:
         place = cord[1]
-        if (place == col or place + (row - cord[0]) == col
-                or place - (row - cord[0]) == col):
+        if (place == col or place + (row - cord[0]) == col or place -
+                (row - cord[0]) == col):
             return False
     return True
 
