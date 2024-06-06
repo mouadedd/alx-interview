@@ -22,3 +22,4 @@ function order (characters) {
     });
   }
 }
+
