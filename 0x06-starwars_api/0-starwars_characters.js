@@ -5,7 +5,7 @@ const request = require('request');
 const film = process.argv[2];
 const api = 'https://swapi-api.hbtn.io/api/';
 const url = api + 'films/' + film + '/';
-request.get({ url: url }, function (error, response, body) {
+request.get({ url }, function (error, response, body) {
   if (!error) {
     const characters = JSON.parse(body).characters;
     order(characters);
